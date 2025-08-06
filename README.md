@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/andreypiekas/WindowsManagementSuite/main/assets/banner.png" alt="Windows Management Suite Banner"/>
-</p>
+
 
 <h1 align="center">🚀 Windows Management Suite V1.1</h1>
 
