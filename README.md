@@ -1,250 +1,157 @@
-# 🚀 Windows Management Suite v2.0
+<p align="center">
+  <img src="https://raw.githubusercontent.com/andreypiekas/WindowsManagementSuite/main/assets/banner.png" alt="Windows Management Suite Banner"/>
+</p>
 
-## 💻 Sistema Avançado de Suporte Técnico para Windows
+<h1 align="center">🚀 Windows Management Suite V1.1</h1>
 
-220+ comandos e ferramentas em uma interface unificada
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-Windows-blue.svg">
+  <img src="https://img.shields.io/badge/Script-Batch-555555.svg">
+  <img src="https://img.shields.io/badge/Active%20Directory-Supported-blue.svg">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg">
+</p>
 
-## 📋 Índice
+<p align="center">
+  💻 Sistema Avançado de Suporte Técnico para Windows<br>
+  220+ comandos e ferramentas em uma interface unificada
+</p>
 
-- [📖 Sobre](#-sobre)
-- [✨ Características](#-características)
-- [🔧 Instalação](#-instalação)
-- [🎯 Como Usar](#-como-usar)
-- [📂 Categorias](#-categorias)
-- [⚙️ Requisitos](#-requisitos)
-- [📸 Screenshots](#-screenshots)
-- [🤝 Contribuição](#-contribuição)
-- [📄 Licença](#-licença)
-- [👨‍💻 Autor](#-autor)
+---
 
 ## 📖 Sobre
 
-O **Windows Management Suite (WMS) v2.0** é uma ferramenta completa de administração e suporte técnico para sistemas Windows, desenvolvida em Batch Script. Oferece mais de 220 comandos e funcionalidades organizados em 14 categorias principais, incluindo suporte completo ao Active Directory.
+O **Windows Management Suite (WMS) V1.1** é uma solução desenvolvida em Batch Script que centraliza todas as ferramentas essenciais para administração, diagnóstico e suporte técnico no Windows. Ideal para técnicos e administradores de rede, oferece interface intuitiva, logs detalhados e segurança reforçada.
 
-### 🎯 Objetivo
+---
 
-Centralizar todas as ferramentas essenciais de diagnóstico, manutenção e administração do Windows em uma única interface intuitiva, eliminando a necessidade de memorizar comandos ou navegar por múltiplas ferramentas.
+## ✨ Funcionalidades
 
-## ✨ Características
+- ✅ Interface com 14 categorias organizadas
+- ✅ Compatibilidade com Active Directory
+- ✅ Mais de **220 comandos nativos** do Windows
+- ✅ Confirmação para operações críticas
+- ✅ Log com data/hora de cada ação
+- ✅ Detecção de domínio e arquitetura do SO
+- ✅ Execução automatizada com privilégios administrativos
+- ✅ Menus visuais com emojis e design ASCII
+- ✅ Backup automático antes de alterações
+- ✅ Totalmente **offline**
 
-### 🔥 Funcionalidades Principais
-
-- 220+ comandos nativos do Windows organizados
-- Interface moderna com caracteres Unicode
-- Sistema de logging completo com timestamps
-- Verificação automática de privilégios administrativos
-- Compatibilidade total com Windows 7/8.1/10/11
-- Suporte completo ao Active Directory
-- Funções de segurança com confirmação para operações críticas
-
-### 🛡️ Segurança
-
-- Detecção automática de privilégios
-- Confirmação para operações críticas
-- Log detalhado de todas as ações
-- Backup automático antes de alterações
-
-### 🎨 Interface
-
-- Menu categorizado intuitivo
-- Feedback visual com emojis
-- Navegação simplificada
-- Sistema de ajuda integrado
+---
 
 ## 🔧 Instalação
 
 ### 📋 Pré-requisitos
 
-- Windows 7/8.1/10/11
-- Privilégios de Administrador
-- PowerShell (para algumas funções)
+- SO: Windows 7 SP1 / 8.1 / 10 / 11
+- Acesso como Administrador
+- PowerShell 5.1+
 
-### 💾 Download e Execução
-
-Clone o repositório:
+### 📥 Como instalar
 
 ```bash
 git clone https://github.com/andreypiekas/WindowsManagementSuite.git
 ```
 
-Execute o script:
-
-```bash
-# Clique com botão direito no arquivo .bat
-# Selecione "Executar como administrador"
-```
-
-Ou execute via CMD:
+### ▶️ Executando
 
 ```cmd
-# Abra CMD como Administrador
 cd WindowsManagementSuite
 WindowsManagementSuite.bat
 ```
 
-## 🎯 Como Usar
+Ou clique com o botão direito no `.bat` e selecione **"Executar como administrador"**.
 
-1. Execute como Administrador (obrigatório)  
-2. Escolha uma categoria no menu principal (1-14)  
-3. Selecione a função desejada dentro da categoria  
-4. Siga as instruções na tela  
-5. Visualize o log das ações executadas (opção 98)
+---
 
-## 📝 Exemplo de Uso
+## 🛠️ Como Usar
+
+1. Execute o `.bat` como Administrador.
+2. Escolha a categoria (1 a 14).
+3. Selecione a função desejada dentro da categoria.
+4. As ações serão registradas no log em `%TEMP%`.
+
+---
+
+## 📂 Categorias Disponíveis
 
 ```
-┌─────────────────────────── CATEGORIAS PRINCIPAIS ────────────────────────────┐
-│ 1. 💻 SISTEMA E HARDWARE      2. 🔧 DISCO E ARQUIVOS                          │
-│ 3. 🌐 REDE E CONECTIVIDADE    4. 🛡️ SEGURANÇA E FIREWALL                      │
-│ 5. 🚀 PERFORMANCE E MEMÓRIA   6. 👤 USUÁRIOS E GRUPOS                         │
-└──────────────────────────────────────────────────────────────────────────────┘
-Escolha uma categoria (0-14, 98-99): 1
+┌────────────────────────────── CATEGORIAS ───────────────────────────────┐
+│ 1. 💻 Sistema e Hardware       2. 🔧 Disco e Arquivos                    │
+│ 3. 🌐 Rede e Conectividade     4. 🛡️ Segurança e Firewall                │
+│ 5. 🚀 Performance e Memória    6. 👤 Usuários e Grupos                   │
+│ 7. 🔄 Serviços e Processos     8. 📊 Logs e Monitoramento               │
+│ 9. 🛠️ Ferramentas Avançadas   10. ⚙️ Configurações do Sistema          │
+│11. 📦 Programas e Drivers     12. 🔍 Diagnósticos Completos             │
+│13. 🏢 Active Directory         14. 📋 Backup e Recuperação              │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
-## 📂 Categorias
-
-**💻 1. Sistema e Hardware (15 opções)**  
-Informações completas do sistema  
-Hardware e componentes  
-BIOS/UEFI, CPU, Memória  
-Dispositivos PnP e USB  
-Sensores e temperatura  
-Verificação de integridade (SFC)  
-
-**🔧 2. Disco e Arquivos (15 opções)**  
-**🌐 3. Rede e Conectividade (15 opções)**  
-**🛡️ 4. Segurança e Firewall (15 opções)**  
-**🚀 5. Performance e Memória (15 opções)**  
-**👤 6. Usuários e Grupos (15 opções)**  
-**🔄 7. Serviços e Processos (15 opções)**  
-**📊 8. Logs e Monitoramento (15 opções)**  
-**🛠️ 9. Ferramentas Avançadas (15 opções)**  
-**⚙️ 10. Configurações do Sistema (15 opções)**  
-**📦 11. Programas e Drivers (15 opções)**  
-**🔍 12. Diagnósticos Completos (15 opções)**  
-**🏢 13. Active Directory (20 opções)**  
-**📋 14. Backup e Recuperação (15 opções)**  
+---
 
 ## ⚙️ Requisitos
 
-### 📋 Requisitos Mínimos
+| Tipo              | Mínimo                     | Recomendado           |
+|-------------------|-----------------------------|------------------------|
+| SO                | Windows 7 SP1+              | Windows 10/11          |
+| RAM               | 2 GB                        | 4 GB+                  |
+| Espaço            | 50 MB livre                 | 100 MB                 |
+| PowerShell        | Qualquer                    | v5.1+                  |
+| Domínio (AD)      | Opcional                    | Requer RSAT instalado  |
 
-| Componente | Requisito                |
-|------------|--------------------------|
-| SO         | Windows 7 SP1 ou superior|
-| RAM        | 2 GB                     |
-| Espaço     | 50 MB livres             |
-| Privilégios| Administrador            |
+---
 
-### 📋 Requisitos Recomendados
-
-| Componente | Recomendação     |
-|------------|------------------|
-| SO         | Windows 10/11    |
-| RAM        | 4 GB+            |
-| PowerShell | 5.1+             |
-| Rede       | Para funções AD  |
-
-### 🔧 Dependências Opcionais
-
-- RSAT Tools (para Active Directory)  
-- Windows PowerShell (para funções avançadas)  
-- WinGet (para gerenciamento de programas)
-
-## 📸 Screenshots
-
-### 🏠 Menu Principal
+## 📸 Exemplo Visual
 
 ```
-╔════════════════════════════════════════════════════════════════════════════╗
-║                 Windows Management Suite v2.0                             ║
-║                      por Andrey                                           ║
-║                                                                            ║
-║ Sistema: Windows 11 Pro                Arquitetura: 64-bit                ║
-║ Dominio: EMPRESA.LOCAL                                                  ║
-╚════════════════════════════════════════════════════════════════════════════╝
-
-┌─────────────────────────── CATEGORIAS PRINCIPAIS ────────────────────────────┐
-│ 1. 💻 SISTEMA E HARDWARE      2. 🔧 DISCO E ARQUIVOS                          │
-│ 3. 🌐 REDE E CONECTIVIDADE    4. 🛡️ SEGURANÇA E FIREWALL                      │
-│ 5. 🚀 PERFORMANCE E MEMÓRIA   6. 👤 USUÁRIOS E GRUPOS                         │
-└──────────────────────────────────────────────────────────────────────────────┘
+╔════════════════════════════════════════════════════════════════════════╗
+║                    Windows Management Suite V1.1                      ║
+║                     por Andrey Gheno Piekas                          ║
+║  Sistema: Windows 11 Pro  |  Arquitetura: 64-bit  |  Domínio: XYZ     ║
+╚════════════════════════════════════════════════════════════════════════╝
 ```
 
-### 📊 Sistema de Logs
-
-```
-╔════════════════════════════════════════════════════════════════════════════╗
-║                         📋 LOG DE ATIVIDADES                              ║
-╚════════════════════════════════════════════════════════════════════════════╝
-
-[06/08/2025 18:30:15] Iniciando Windows Management Suite  
-[06/08/2025 18:30:22] Executando systeminfo  
-[06/08/2025 18:31:45] Verificando status do Windows Defender  
-[06/08/2025 18:32:10] Executando diagnóstico de rede  
-```
-
-## 🤝 Contribuição
-
-Contribuições são bem-vindas! Por favor, siga estas diretrizes:
-
-### 🔄 Como Contribuir
-
-1. Fork o projeto  
-2. Crie uma branch para sua feature  
-   ```bash
-   git checkout -b feature/AmazingFeature
-   ```
-3. Commit suas mudanças  
-   ```bash
-   git commit -m "Add some AmazingFeature"
-   ```
-4. Push para a branch  
-   ```bash
-   git push origin feature/AmazingFeature
-   ```
-5. Abra um Pull Request
-
-### 📝 Diretrizes
-
-- Mantenha o código comentado  
-- Teste todas as funcionalidades  
-- Siga o padrão de nomenclatura  
-- Atualize a documentação se necessário  
-
-### 🐛 Reportar Bugs
-
-Abra uma issue com:
-
-- Descrição do problema  
-- Passos para reproduzir  
-- Sistema operacional  
-- Screenshots (se aplicável)  
+---
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a MIT License - veja o arquivo LICENSE para detalhes.
-
-### 📋 Resumo da Licença
+Licenciado sob a [MIT License](LICENSE).
 
 ✅ Uso comercial permitido  
 ✅ Modificação permitida  
 ✅ Distribuição permitida  
 ✅ Uso privado permitido  
 ❌ Sem garantia  
-❌ Autor não se responsabiliza por danos  
+❌ O autor não se responsabiliza por danos
+
+---
 
 ## 👨‍💻 Autor
 
 **Andrey Gheno Piekas**
 
-### 💼 Sobre o Desenvolvedor
+[![GitHub](https://img.shields.io/badge/GitHub-andreypiekas-black?logo=github)](https://github.com/andreypiekas)  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Conectar-blue?logo=linkedin)](https://www.linkedin.com/in/andreypiekas)
+
+---
+
+## 🧠 Sobre o Desenvolvedor
 
 Especialista em automação de sistemas Windows e Active Directory, com vasta experiência em suporte técnico e administração de redes corporativas.
 
-### 🙏 Agradecimentos
+---
 
-- Microsoft por fornecer excelente documentação  
-- Comunidade Windows Admin para feedback  
-- Todos os contribuidores do projeto  
-- Usuários que reportaram bugs e melhorias  
+## 📊 Estatísticas do Projeto
+
+[![](https://img.shields.io/github/repo-size/andreypiekas/WindowsManagementSuite)](https://github.com/andreypiekas/WindowsManagementSuite)  
+[![](https://img.shields.io/github/last-commit/andreypiekas/WindowsManagementSuite)](https://github.com/andreypiekas/WindowsManagementSuite/commits/main)  
+[![](https://img.shields.io/github/issues/andreypiekas/WindowsManagementSuite)](https://github.com/andreypiekas/WindowsManagementSuite/issues)  
+[![](https://img.shields.io/github/stars/andreypiekas/WindowsManagementSuite)](https://github.com/andreypiekas/WindowsManagementSuite/stargazers)
+
+---
+
+## 🙏 Agradecimentos
+
+- Microsoft Docs  
+- Comunidade Windows Admin  
+- Usuários que testaram e reportaram melhorias
