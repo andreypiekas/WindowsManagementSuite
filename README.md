@@ -135,7 +135,7 @@ Licenciado sob a [MIT License](LICENSE).
 
 ## 🧠 Sobre o Desenvolvedor
 
-Especialista em automação de sistemas Windows e Active Directory, com vasta experiência em suporte técnico e administração de redes corporativas.
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Conectar-blue?logo=linkedin)](https://www.linkedin.com/in/andreypiekas)
 
 ---
 
