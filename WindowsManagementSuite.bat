@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-title SISTEMA AVANCADO DE SUPORTE TECNICO - Windows Management Suite v2.0
+title SISTEMA AVANCADO DE SUPORTE TECNICO - Windows Management Suite v1.1
 color 0A
 
 REM ===============================================================================
@@ -2727,3 +2727,4 @@ REM                	 DESENVOLVIDO POR: ANDREY GHENO PIEKAS
 REM                     http://github.com/andreypiekas/
 REM                    TOTAL: 200+ COMANDOS E FERRAMENTAS  
 REM ===============================================================================
+
