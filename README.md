@@ -58,6 +58,7 @@ Backup e Recuperação (15 ferramentas)
 ### 📋 Pré-requisitos
 
 - SO: Windows 7 SP1 / 8.1 / 10 / 11
+- Estar com WMIC ativo
 - Acesso como Administrador
 - PowerShell 5.1+
 
@@ -91,13 +92,15 @@ Ou clique com o botão direito no `.bat` e selecione **"Executar como administra
 
 ```
 ┌────────────────────────────── CATEGORIAS ───────────────────────────────┐
-│ 1. 💻 Sistema e Hardware       2. 🔧 Disco e Arquivos                    │
-│ 3. 🌐 Rede e Conectividade     4. 🛡️ Segurança e Firewall                │
-│ 5. 🚀 Performance e Memória    6. 👤 Usuários e Grupos                   │
-│ 7. 🔄 Serviços e Processos     8. 📊 Logs e Monitoramento               │
+│ 1. 💻 Sistema e Hardware       2. 🔧 Disco e Arquivos                  │
+│ 3. 🌐 Rede e Conectividade     4. 🛡️ Segurança e Firewall              │
+│ 5. 🚀 Performance e Memória    6. 👤 Usuários e Grupos                 │
+│ 7. 🔄 Serviços e Processos     8. 📊 Logs e Monitoramento              │
 │ 9. 🛠️ Ferramentas Avançadas   10. ⚙️ Configurações do Sistema          │
-│11. 📦 Programas e Drivers     12. 🔍 Diagnósticos Completos             │
-│13. 🏢 Active Directory         14. 📋 Backup e Recuperação              │
+│11. 📦 Programas e Drivers     12. 🔍 Diagnósticos Completos            │
+│13. 🏢 Active Directory         14. 📋 Backup e Recuperação             │
+│98. 🏢 VER LOG DE ATIVIDADES    99. 📋 SOBRE O SISTEMA                  │
+│0. 🏢 SAIR                                                               │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
