@@ -37,6 +37,22 @@ O **Windows Management Suite (WMS) V1.1** é uma solução desenvolvida em Batch
 
 ---
 
+## 📋 Categorias Principais:
+Sistema e Hardware (15 ferramentas)
+Disco e Arquivos (15 ferramentas)
+Rede e Conectividade (15 ferramentas)
+Segurança e Firewall (15 ferramentas)
+Performance e Memória (15 ferramentas)
+Usuários e Grupos (15 ferramentas)
+Serviços e Processos (15 ferramentas)
+Logs e Monitoramento (15 ferramentas)
+Ferramentas Avançadas (15 ferramentas)
+Configurações do Sistema (15 ferramentas)
+Programas e Drivers (15 ferramentas)
+Diagnósticos Completos (15 ferramentas)
+Active Directory (18 ferramentas)
+Backup e Recuperação (15 ferramentas)
+
 ## 🔧 Instalação
 
 ### 📋 Pré-requisitos
