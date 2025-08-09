@@ -42,9 +42,20 @@ if %errorlevel% neq 0 (
     exit /b
 )
 
-REM Detectar informacoes do sistema
-for /f "tokens=2 delims==" %%a in ('wmic os get Caption /value ^| find "="') do set "OS_VERSION=%%a"
-for /f "tokens=2 delims==" %%a in ('wmic os get OSArchitecture /value ^| find "="') do set "OS_ARCH=%%a"
+REM Detectar informacoes usando PowerShell 
+for /f "delims=" %%a in ('powershell -command "(Get-WmiObject -Class Win32_OperatingSystem).Caption" 2^>nul') do set "OS_VERSION=%%a"
+for /f "delims=" %%a in ('powershell -command "(Get-WmiObject -Class Win32_OperatingSystem).OSArchitecture" 2^>nul') do set "OS_ARCH=%%a"
+
+REM Fallback se PowerShell falhar
+if "!OS_VERSION!"=="" set "OS_VERSION=%OS%"
+if "!OS_ARCH!"=="" (
+    if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+        set "OS_ARCH=64-bit"
+    ) else (
+        set "OS_ARCH=32-bit"
+    )
+)
+
 
 REM Detectar se esta em dominio
 set "DOMAIN_STATUS=WORKGROUP"
