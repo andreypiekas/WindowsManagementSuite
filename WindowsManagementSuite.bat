@@ -61,7 +61,7 @@ REM ============================================================================
 cls
 echo.
 echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                    %SCRIPT_NAME% v1.0                           ║
+echo ║                    %SCRIPT_NAME% v1.1                           ║
 echo ║                              por Andrey Gheno Piekas                       ║
 echo ║                                                                            ║
 echo ║  Sistema: %OS_VERSION%                                        ║
