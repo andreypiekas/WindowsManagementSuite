@@ -7,10 +7,11 @@ REM ============================================================================
 REM  SISTEMA AVANCADO DE SUPORTE TECNICO - Windows Management Suite
 REM  Autor: Andrey Gheno Piekas
 REM  Github: http://github.com/andreypiekas/
-REM  Versao: 1.1
-REM  Data: 06/08/2025
+REM  Versao: 1.1 (Corrigido para ANSI)
+REM  Data: 08/08/2025
 REM  Descricao: Sistema completo de diagnostico, manutencao e suporte para Windows
 REM  Compatibilidade: Windows 7/8.1/10/11 + Active Directory
+REM  Codificacao: ANSI (Windows-1252)
 REM  Privilegios: Detecta e solicita elevacao automaticamente
 REM ===============================================================================
 
@@ -27,14 +28,14 @@ REM Verificar privilegios administrativos
 net session >nul 2>&1
 if %errorlevel% neq 0 (
     echo.
-    echo ╔════════════════════════════════════════════════════════════════╗
-    echo ║                    PRIVILEGIOS NECESSARIOS                    ║
-    echo ║                                                                ║
-    echo ║  Este script requer privilegios de administrador para         ║
-    echo ║  executar a maioria das funcionalidades.                      ║
-    echo ║                                                                ║
-    echo ║  Executando novamente com privilegios elevados...             ║
-    echo ╚════════════════════════════════════════════════════════════════╝
+    echo +----------------------------------------------------------------+
+    echo ¦                    PRIVILEGIOS NECESSARIOS                     ¦
+    echo ¦                                                                ¦
+    echo ¦  Este script requer privilegios de administrador para          ¦
+    echo ¦  executar a maioria das funcionalidades.                       ¦
+    echo ¦                                                                ¦
+    echo ¦  Executando novamente com privilegios elevados...              ¦
+    echo +----------------------------------------------------------------+
     echo.
     echo [%DATE% %TIME%] Solicitando privilegios administrativos >> "%LOG_FILE%"
     powershell -Command "Start-Process '%0' -Verb RunAs"
@@ -45,7 +46,7 @@ REM Detectar informacoes do sistema
 for /f "tokens=2 delims==" %%a in ('wmic os get Caption /value ^| find "="') do set "OS_VERSION=%%a"
 for /f "tokens=2 delims==" %%a in ('wmic os get OSArchitecture /value ^| find "="') do set "OS_ARCH=%%a"
 
-REM Detectar se está em dominio
+REM Detectar se esta em dominio
 set "DOMAIN_STATUS=WORKGROUP"
 for /f "tokens=2 delims==" %%a in ('wmic computersystem get Domain /value ^| find "="') do (
     if "%%a" neq "%COMPUTERNAME%" set "DOMAIN_STATUS=%%a"
@@ -60,28 +61,28 @@ REM ============================================================================
 :MENU_PRINCIPAL
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                    %SCRIPT_NAME% v1.1                           ║
-echo ║                              por Andrey Gheno Piekas                       ║
-echo ║                                                                            ║
-echo ║  Sistema: %OS_VERSION%                                        ║
-echo ║  Arquitetura: %OS_ARCH%                                                   ║
-echo ║  Dominio: %DOMAIN_STATUS%                                                 ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                    %SCRIPT_NAME% v1.1                            ¦
+echo ¦                              por Andrey Gheno Piekas                         ¦
+echo ¦                                                                            ¦
+echo ¦  Sistema: %OS_VERSION%                                     ¦
+echo ¦  Arquitetura: %OS_ARCH%                                                    ¦
+echo ¦  Dominio: %DOMAIN_STATUS%                                                  ¦
+echo +----------------------------------------------------------------------------+
 echo.
-echo ┌─────────────────────────── CATEGORIAS PRINCIPAIS ────────────────────────────┐
-echo │                                                                            │
-echo │  1. 💻 SISTEMA E HARDWARE           2. 🔧 DISCO E ARQUIVOS               │
-echo │  3. 🌐 REDE E CONECTIVIDADE        4. 🛡️  SEGURANCA E FIREWALL          │
-echo │  5. 🚀 PERFORMANCE E MEMORIA        6. 👤 USUARIOS E GRUPOS               │
-echo │  7. 🔄 SERVICOS E PROCESSOS         8. 📊 LOGS E MONITORAMENTO            │
-echo │  9. 🛠️  FERRAMENTAS AVANCADAS       10. ⚙️  CONFIGURACOES DO SISTEMA      │
-echo │  11. 📦 PROGRAMAS E DRIVERS         12. 🔍 DIAGNOSTICOS COMPLETOS         │
-echo │  13. 🏢 ACTIVE DIRECTORY            14. 📋 BACKUP E RECUPERACAO           │
-echo │                                                                            │
-echo │  98. 📋 VER LOG DE ATIVIDADES       99. ℹ️  SOBRE O SISTEMA               │
-echo │  0. ❌ SAIR                                                                │
-echo └────────────────────────────────────────────────────────────────────────────┘
+echo +--------------------------- CATEGORIAS PRINCIPAIS ----------------------------+
+echo ¦                                                                            ¦
+echo ¦  1. SISTEMA E HARDWARE           2. DISCO E ARQUIVOS                        ¦
+echo ¦  3. REDE E CONECTIVIDADE         4. SEGURANCA E FIREWALL                    ¦
+echo ¦  5. PERFORMANCE E MEMORIA        6. USUARIOS E GRUPOS                       ¦
+echo ¦  7. SERVICOS E PROCESSOS         8. LOGS E MONITORAMENTO                    ¦
+echo ¦  9. FERRAMENTAS AVANCADAS        10. CONFIGURACOES DO SISTEMA               ¦
+echo ¦  11. PROGRAMAS E DRIVERS         12. DIAGNOSTICOS COMPLETOS                 ¦
+echo ¦  13. ACTIVE DIRECTORY            14. BACKUP E RECUPERACAO                   ¦
+echo ¦                                                                            ¦
+echo ¦  98. VER LOG DE ATIVIDADES       99. SOBRE O SISTEMA                        ¦
+echo ¦  0. SAIR                                                                   ¦
+echo +----------------------------------------------------------------------------+
 echo.
 set /p "categoria=Escolha uma categoria (0-14, 98-99): "
 
@@ -106,7 +107,6 @@ if "%categoria%"=="0" goto SAIR
 echo Opcao invalida! Pressione qualquer tecla para continuar...
 pause >nul
 goto MENU_PRINCIPAL
-
 REM ===============================================================================
 REM                        1. SISTEMA E HARDWARE
 REM ===============================================================================
@@ -114,9 +114,9 @@ REM ============================================================================
 :MENU_SISTEMA
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                           💻 SISTEMA E HARDWARE                            ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                           SISTEMA E HARDWARE                             ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  1. Informacoes Completas do Sistema (systeminfo)
 echo  2. Informacoes de Hardware (msinfo32)
@@ -134,7 +134,7 @@ echo 13. Informacoes de Placas de Video
 echo 14. Portas e Dispositivos USB
 echo 15. Monitor e Tela
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-15): "
 
@@ -222,7 +222,7 @@ goto MENU_SISTEMA
 call :LOG_ACTION "Executando relatorio de energia"
 echo Gerando relatorio de energia...
 powercfg /energy /output "%TEMP%\energy-report.html"
-if exist "%TEMP%\energy-report.html" start "%TEMP%\energy-report.html"
+if exist "%TEMP%\energy-report.html" start "" "%TEMP%\energy-report.html"
 pause
 goto MENU_SISTEMA
 
@@ -268,9 +268,9 @@ REM ============================================================================
 :MENU_DISCO
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                            🔧 DISCO E ARQUIVOS                             ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                            DISCO E ARQUIVOS                              ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  1. Verificar e Reparar Disco (chkdsk)
 echo  2. Desfragmentar Disco (defrag)
@@ -288,7 +288,7 @@ echo 13. Backup com Robocopy
 echo 14. Verificar Integridade (DISM)
 echo 15. Limpar Windows Update
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-15): "
 
@@ -365,7 +365,7 @@ goto MENU_DISCO
 :DISK_CACHE
 call :LOG_ACTION "Limpando cache do Windows Store"
 echo Limpando cache do Windows Store...
-start wsreset
+start "" wsreset
 goto MENU_DISCO
 
 :DISK_RECYCLE
@@ -430,11 +430,12 @@ goto MENU_DISCO
 call :LOG_ACTION "Limpando arquivos do Windows Update"
 echo Limpando arquivos do Windows Update...
 net stop wuauserv
-del /f /s /q "%WINDIR%\SoftwareDistribution\*"
+rmdir /s /q "%WINDIR%\SoftwareDistribution" 2>nul
 net start wuauserv
 echo Limpeza concluida!
 pause
 goto MENU_DISCO
+
 REM ===============================================================================
 REM                        3. REDE E CONECTIVIDADE
 REM ===============================================================================
@@ -442,9 +443,9 @@ REM ============================================================================
 :MENU_REDE
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                         🌐 REDE E CONECTIVIDADE                            ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                         REDE E CONECTIVIDADE                             ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  1. Testar Conectividade (ping)
 echo  2. Configuracao de IP (ipconfig)
@@ -462,7 +463,7 @@ echo 13. Informacoes de Adaptadores
 echo 14. Diagnostico de Rede
 echo 15. Configurar Wi-Fi
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-15): "
 
@@ -578,7 +579,9 @@ echo Digite o host:
 set /p "host=Host: "
 echo Digite a porta:
 set /p "port=Porta: "
+echo Tentando conectar em %host% na porta %port%... Pressione Ctrl+C para sair.
 telnet %host% %port%
+pause
 goto MENU_REDE
 
 :NET_ADAPTERS
@@ -616,9 +619,9 @@ REM ============================================================================
 :MENU_SEGURANCA
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                          🛡️ SEGURANCA E FIREWALL                          ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                          SEGURANCA E FIREWALL                            ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  1. Status do Windows Defender
 echo  2. Verificacao Completa de Virus
@@ -636,7 +639,7 @@ echo 13. Configuracoes UAC
 echo 14. Verificar Atualizacoes de Seguranca
 echo 15. Logs de Seguranca
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-15): "
 
@@ -765,7 +768,7 @@ goto MENU_SEGURANCA
 :SEC_SECURITY_UPDATES
 call :LOG_ACTION "Verificando atualizacoes de seguranca"
 echo Verificando atualizacoes de seguranca...
-powershell -Command "Get-WindowsUpdate | Where-Object {$_.Title -like '*Security*'}" 2>nul || echo PowerShell module nao disponivel
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Install-Module PSWindowsUpdate -Force -Confirm:$false -Scope CurrentUser; Get-WindowsUpdate -Category 'Security' -AcceptAll -Install" 2>nul || echo Falha ao verificar. Tente manualmente.
 pause
 goto MENU_SEGURANCA
 
@@ -775,7 +778,6 @@ echo Eventos de Seguranca Recentes:
 wevtutil qe Security /c:10 /f:text | more
 pause
 goto MENU_SEGURANCA
-
 REM ===============================================================================
 REM                       5. PERFORMANCE E MEMORIA
 REM ===============================================================================
@@ -783,9 +785,9 @@ REM ============================================================================
 :MENU_PERFORMANCE
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                        🚀 PERFORMANCE E MEMORIA                            ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                        PERFORMANCE E MEMORIA                             ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  1. Monitor de Performance (perfmon)
 echo  2. Gerenciador de Tarefas (taskmgr)
@@ -803,7 +805,7 @@ echo 13. Historico de Performance
 echo 14. Configuracoes de Energia
 echo 15. Otimizacao Automatica
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-15): "
 
@@ -841,8 +843,8 @@ goto MENU_PERFORMANCE
 :PERF_MEMORY_INFO
 call :LOG_ACTION "Coletando informacoes de memoria"
 echo Informacoes de Memoria:
-systeminfo | find "Total Physical Memory"
-systeminfo | find "Available Physical Memory"
+systeminfo | find "Memoria Fisica Total"
+systeminfo | find "Memoria Fisica Disponivel"
 wmic memorychip get Capacity,Speed /format:table
 pause
 goto MENU_PERFORMANCE
@@ -863,7 +865,7 @@ goto MENU_PERFORMANCE
 :PERF_MEMORY_USAGE
 call :LOG_ACTION "Verificando uso de memoria"
 echo Processos consumindo mais memoria:
-tasklist /fo table | sort /r /+5 | more
+tasklist /v /fi "MEMUSAGE gt 100000" /fo table | more
 pause
 goto MENU_PERFORMANCE
 
@@ -884,7 +886,6 @@ goto MENU_PERFORMANCE
 :PERF_CLEAR_MEMORY
 call :LOG_ACTION "Limpando memoria RAM"
 echo Limpando memoria RAM...
-echo off | clip
 powershell -Command "[System.GC]::Collect()"
 echo Memoria limpa!
 pause
@@ -934,8 +935,7 @@ echo 1. Limpando arquivos temporarios...
 del /f /s /q "%TEMP%\*" 2>nul
 echo 2. Limpando cache...
 powershell -Command "[System.GC]::Collect()"
-echo 3. Otimizando memoria virtual...
-echo Otimizacao concluida!
+echo 3. Otimizacao concluida!
 pause
 goto MENU_PERFORMANCE
 
@@ -946,9 +946,9 @@ REM ============================================================================
 :MENU_USUARIOS
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                           👤 USUARIOS E GRUPOS                             ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                           USUARIOS E GRUPOS                              ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  1. Listar Usuarios Locais
 echo  2. Listar Grupos Locais
@@ -966,7 +966,7 @@ echo 13. Alterar Senha Usuario
 echo 14. Grupos de Usuario
 echo 15. Direitos de Usuario
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-15): "
 
@@ -1013,8 +1013,8 @@ pause
 goto MENU_USUARIOS
 
 :USER_CREATE
-call :LOG_ACTION "Criando usuario local"
-call :CONFIRM_ACTION
+call :LOG_ACTION "Tentando criar usuario local"
+call :CONFIRM_ACTION "Deseja criar um novo usuario local?"
 echo Digite o nome do usuario:
 set /p "username=Usuario: "
 echo Digite a senha:
@@ -1109,8 +1109,8 @@ call :LOG_ACTION "Verificando grupos do usuario"
 echo Digite o nome do usuario:
 set /p "username=Usuario: "
 echo Grupos do usuario %username%:
-net user %username% | find "Local Group Memberships"
-net user %username% | find "Global Group memberships"
+net user %username% | find "Associacoes de Grupo Local"
+net user %username% | find "Associacoes de Grupo Global"
 pause
 goto MENU_USUARIOS
 
@@ -1129,9 +1129,9 @@ REM ============================================================================
 :MENU_SERVICOS
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                        🔄 SERVICOS E PROCESSOS                             ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                        SERVICOS E PROCESSOS                              ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  1. Listar Todos os Servicos
 echo  2. Servicos em Execucao
@@ -1149,7 +1149,7 @@ echo 13. Processos do Sistema
 echo 14. Configurar Inicializacao de Servico
 echo 15. Dependencias de Servico
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-15): "
 
@@ -1204,8 +1204,8 @@ pause
 goto MENU_SERVICOS
 
 :SVC_STOP
-call :LOG_ACTION "Parando servico"
-call :CONFIRM_ACTION
+call :LOG_ACTION "Tentando parar servico"
+call :CONFIRM_ACTION "Deseja parar o servico selecionado?"
 echo Digite o nome do servico:
 set /p "service=Servico: "
 net stop "%service%"
@@ -1238,8 +1238,8 @@ pause
 goto MENU_SERVICOS
 
 :SVC_KILL_PROCESS
-call :LOG_ACTION "Terminando processo"
-call :CONFIRM_ACTION
+call :LOG_ACTION "Tentando terminar processo"
+call :CONFIRM_ACTION "Deseja forcar o encerramento do processo?"
 echo Digite o nome ou PID do processo:
 set /p "process=Processo: "
 taskkill /f /im "%process%" 2>nul || taskkill /f /pid "%process%"
@@ -1249,14 +1249,14 @@ goto MENU_SERVICOS
 :SVC_PROCESSES_CPU
 call :LOG_ACTION "Listando processos por uso de CPU"
 echo Processos ordenados por uso de CPU:
-wmic process get Name,ProcessId,PercentProcessorTime /format:table 2>nul || echo WMIC nao disponivel
+powershell "Get-Process | Sort-Object CPU -Descending | Select-Object -First 15 | Format-Table -AutoSize"
 pause
 goto MENU_SERVICOS
 
 :SVC_PROCESSES_MEMORY
 call :LOG_ACTION "Listando processos por uso de memoria"
 echo Processos ordenados por uso de memoria:
-tasklist /fo table | sort /r /+5 | more
+tasklist /v /fi "MEMUSAGE gt 100000" /fo table | more
 pause
 goto MENU_SERVICOS
 
@@ -1312,9 +1312,9 @@ REM ============================================================================
 :MENU_LOGS
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                        📊 LOGS E MONITORAMENTO                             ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                        LOGS E MONITORAMENTO                              ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  1. Visualizador de Eventos (eventvwr)
 echo  2. Logs do Sistema
@@ -1332,7 +1332,7 @@ echo 13. Exportar Logs
 echo 14. Limpar Logs
 echo 15. Configurar Auditoria
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-15): "
 
@@ -1365,35 +1365,35 @@ goto MENU_LOGS
 :LOG_SYSTEM
 call :LOG_ACTION "Exibindo logs do sistema"
 echo Logs do Sistema (ultimos 20 eventos):
-wevtutil qe System /c:20 /f:text | more
+wevtutil qe System /c:20 /f:text /rd:true | more
 pause
 goto MENU_LOGS
 
 :LOG_APPLICATION
 call :LOG_ACTION "Exibindo logs de aplicativo"
 echo Logs de Aplicativo (ultimos 20 eventos):
-wevtutil qe Application /c:20 /f:text | more
+wevtutil qe Application /c:20 /f:text /rd:true | more
 pause
 goto MENU_LOGS
 
 :LOG_SECURITY
 call :LOG_ACTION "Exibindo logs de seguranca"
 echo Logs de Seguranca (ultimos 10 eventos):
-wevtutil qe Security /c:10 /f:text | more
+wevtutil qe Security /c:10 /f:text /rd:true | more
 pause
 goto MENU_LOGS
 
 :LOG_SETUP
 call :LOG_ACTION "Exibindo logs de instalacao"
 echo Logs de Instalacao:
-wevtutil qe Setup /c:20 /f:text | more
+wevtutil qe Setup /c:20 /f:text /rd:true | more
 pause
 goto MENU_LOGS
 
 :LOG_ERROR
 call :LOG_ACTION "Exibindo logs de erro"
 echo Eventos de Erro do Sistema:
-wevtutil qe System "/q:*[System[(Level=1 or Level=2)]]" /c:20 /f:text | more
+wevtutil qe System "/q:*[System[(Level=1 or Level=2)]]" /c:20 /f:text /rd:true | more
 pause
 goto MENU_LOGS
 
@@ -1412,28 +1412,28 @@ goto MENU_LOGS
 :LOG_PERFORMANCE
 call :LOG_ACTION "Exibindo logs de performance"
 echo Logs de Performance:
-wevtutil qe "Microsoft-Windows-Diagnostics-Performance/Operational" /c:10 /f:text | more
+wevtutil qe "Microsoft-Windows-Diagnostics-Performance/Operational" /c:10 /f:text /rd:true | more
 pause
 goto MENU_LOGS
 
 :LOG_WINDOWS_UPDATE
 call :LOG_ACTION "Verificando historico do Windows Update"
 echo Historico do Windows Update:
-wevtutil qe "Setup" "/q:*[System[Provider[@Name='Microsoft-Windows-Servicing']]]" /c:10 /f:text | more
+wevtutil qe "Setup" "/q:*[System[Provider[@Name='Microsoft-Windows-Servicing']]]" /c:10 /f:text /rd:true | more
 pause
 goto MENU_LOGS
 
 :LOG_HARDWARE
 call :LOG_ACTION "Exibindo logs de hardware"
 echo Logs de Hardware:
-wevtutil qe System "/q:*[System[Provider[@Name='Microsoft-Windows-Kernel-PnP']]]" /c:10 /f:text | more
+wevtutil qe System "/q:*[System[Provider[@Name='Microsoft-Windows-Kernel-PnP']]]" /c:10 /f:text /rd:true | more
 pause
 goto MENU_LOGS
 
 :LOG_NETWORK
 call :LOG_ACTION "Exibindo logs de rede"
 echo Logs de Rede:
-wevtutil qe System "/q:*[System[Provider[@Name='Microsoft-Windows-NetworkProfile']]]" /c:10 /f:text | more
+wevtutil qe System "/q:*[System[Provider[@Name='Microsoft-Windows-NetworkProfile']]]" /c:10 /f:text /rd:true | more
 pause
 goto MENU_LOGS
 
@@ -1449,8 +1449,8 @@ pause
 goto MENU_LOGS
 
 :LOG_CLEAR
-call :LOG_ACTION "Limpando logs"
-call :CONFIRM_ACTION
+call :LOG_ACTION "Tentando limpar logs"
+call :CONFIRM_ACTION "Deseja realmente limpar os logs selecionados?"
 echo Digite o nome do log para limpar (ex: System, Application):
 set /p "log_name=Log: "
 wevtutil cl %log_name%
@@ -1474,9 +1474,9 @@ REM ============================================================================
 :MENU_AVANCADAS
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                        🛠️ FERRAMENTAS AVANCADAS                            ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                        FERRAMENTAS AVANCADAS                             ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  1. Editor do Registro (regedit)
 echo  2. Configuracao do Sistema (msconfig)
@@ -1494,7 +1494,7 @@ echo 13. WMI Explorer
 echo 14. Ferramentas do Sistema
 echo 15. Modo de Compatibilidade
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-15): "
 
@@ -1520,8 +1520,8 @@ pause
 goto MENU_AVANCADAS
 
 :ADV_REGEDIT
-call :LOG_ACTION "Abrindo editor do registro"
-call :CONFIRM_ACTION
+call :LOG_ACTION "Tentando abrir editor do registro"
+call :CONFIRM_ACTION "Modificar o registro pode causar danos ao sistema. Deseja continuar?"
 start regedit
 goto MENU_AVANCADAS
 
@@ -1574,8 +1574,8 @@ pause
 goto MENU_AVANCADAS
 
 :ADV_RESTORE_REG
-call :LOG_ACTION "Restaurando registro"
-call :CONFIRM_ACTION
+call :LOG_ACTION "Tentando restaurar registro"
+call :CONFIRM_ACTION "Restaurar o registro pode causar danos ao sistema. Deseja continuar?"
 echo Digite o caminho do arquivo de backup:
 set /p "backup_file=Arquivo: "
 reg import "%backup_file%"
@@ -1634,7 +1634,6 @@ call :LOG_ACTION "Configurando modo de compatibilidade"
 echo Modo de Compatibilidade:
 echo Digite o caminho do executavel:
 set /p "exe_path=Caminho: "
-echo Configurando modo de compatibilidade...
 echo Use as Propriedades do arquivo para configurar manualmente.
 start "" "%exe_path%" 2>nul || echo Arquivo nao encontrado
 goto MENU_AVANCADAS
@@ -1646,9 +1645,9 @@ REM ============================================================================
 :MENU_CONFIG
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                      ⚙️ CONFIGURACOES DO SISTEMA                          ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                      CONFIGURACOES DO SISTEMA                            ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  1. Painel de Controle
 echo  2. Configuracoes do Windows
@@ -1666,7 +1665,7 @@ echo 13. Configuracoes Regionais
 echo 14. Dispositivos e Impressoras
 echo 15. Sistema e Seguranca
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-15): "
 
@@ -1773,9 +1772,9 @@ REM ============================================================================
 :MENU_PROGRAMAS
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                        📦 PROGRAMAS E DRIVERS                              ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                        PROGRAMAS E DRIVERS                               ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  1. Listar Programas Instalados
 echo  2. Atualizar Programas (winget)
@@ -1793,7 +1792,7 @@ echo 13. Programas Padrao
 echo 14. Recursos do Windows
 echo 15. Store Apps
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-15): "
 
@@ -1828,21 +1827,21 @@ goto MENU_PROGRAMAS
 :PROG_UPDATE_ALL
 call :LOG_ACTION "Atualizando todos os programas"
 echo Atualizando todos os programas via winget...
-winget upgrade --all
+winget upgrade --all --accept-package-agreements --accept-source-agreements
 pause
 goto MENU_PROGRAMAS
 
 :PROG_INSTALL
 call :LOG_ACTION "Instalando programa"
-echo Digite o nome do programa para instalar:
+echo Digite o ID do programa para instalar via winget:
 set /p "program=Programa: "
-winget install "%program%"
+winget install --id "%program%" --accept-package-agreements --accept-source-agreements
 pause
 goto MENU_PROGRAMAS
 
 :PROG_UNINSTALL
 call :LOG_ACTION "Desinstalando programa"
-call :CONFIRM_ACTION
+call :CONFIRM_ACTION "Deseja desinstalar o programa selecionado?"
 echo Digite o nome do programa para desinstalar:
 set /p "program=Programa: "
 wmic product where "name like '%%%program%%%'" call uninstall
@@ -1927,9 +1926,9 @@ REM ============================================================================
 :MENU_DIAGNOSTICOS
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                        🔍 DIAGNOSTICOS COMPLETOS                           ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                        DIAGNOSTICOS COMPLETOS                            ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  1. Diagnostico Completo do Sistema
 echo  2. Teste de Memoria (mdsched)
@@ -1947,7 +1946,7 @@ echo 13. Teste de Conectividade
 echo 14. Analise de Sistema
 echo 15. Diagnostico Automatizado
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-15): "
 
@@ -1974,9 +1973,9 @@ goto MENU_DIAGNOSTICOS
 
 :DIAG_COMPLETE_SYSTEM
 call :LOG_ACTION "Executando diagnostico completo do sistema"
-echo ╔═══════════════════════════════════════════════════════════════╗
-echo ║                DIAGNOSTICO COMPLETO DO SISTEMA               ║
-echo ╚═══════════════════════════════════════════════════════════════╝
+echo +---------------------------------------------------------------+
+echo ¦                DIAGNOSTICO COMPLETO DO SISTEMA                ¦
+echo +---------------------------------------------------------------+
 echo.
 echo 1. Verificando arquivos do sistema...
 sfc /scannow
@@ -2062,7 +2061,7 @@ goto MENU_DIAGNOSTICOS
 :DIAG_RESTORE_POINT
 call :LOG_ACTION "Criando ponto de restauracao"
 echo Criando ponto de restauracao do sistema...
-powershell -Command "Checkpoint-Computer -Description 'Ponto Manual - WMS v2.0' -RestorePointType 'MODIFY_SETTINGS'"
+powershell -Command "Checkpoint-Computer -Description 'Ponto Manual - WMS V1.1' -RestorePointType 'MODIFY_SETTINGS'"
 echo Ponto de restauracao criado com sucesso!
 pause
 goto MENU_DIAGNOSTICOS
@@ -2126,23 +2125,19 @@ goto MENU_DIAGNOSTICOS
 
 :DIAG_AUTOMATED
 call :LOG_ACTION "Executando diagnostico automatizado"
-echo ═══════════════════════════════════════════════════════════════
+echo ---------------------------------------------------------------
 echo           DIAGNOSTICO AUTOMATIZADO DO SISTEMA
-echo ═══════════════════════════════════════════════════════════════
+echo ---------------------------------------------------------------
 echo.
 echo Executando verificacoes automaticas...
 echo.
-echo ✓ Verificando servicos...
 sc query wuauserv | find "STATE"
-echo ✓ Verificando conectividade...
-ping 8.8.8.8 -n 1 | find "TTL"
-echo ✓ Verificando espaco em disco...
-fsutil volume diskfree C: | find "Total bytes"
+ping 8.8.8.8 -n 1 >nul && (echo ? Conectividade: OK) || (echo X Conectividade: Falha)
+fsutil volume diskfree C: | find "bytes livres no total"
 echo.
 echo Diagnostico automatizado concluido!
 pause
 goto MENU_DIAGNOSTICOS
-
 REM ===============================================================================
 REM                       13. ACTIVE DIRECTORY
 REM ===============================================================================
@@ -2150,9 +2145,9 @@ REM ============================================================================
 :MENU_ACTIVE_DIRECTORY
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                            🏢 ACTIVE DIRECTORY                             ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                            ACTIVE DIRECTORY                              ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  Status do Dominio: %DOMAIN_STATUS%
 echo.
@@ -2162,7 +2157,7 @@ if "%DOMAIN_STATUS%"=="WORKGROUP" (
     echo.
 )
 echo  1. Usuarios do Dominio          11. Replicacao AD
-echo  2. Grupos do Dominio            12. FSMO Roles  
+echo  2. Grupos do Dominio            12. FSMO Roles
 echo  3. Computadores do Dominio      13. Sites e Subnets
 echo  4. Politicas de Grupo           14. Confiancas de Dominio
 echo  5. Controladores de Dominio     15. Diagnostico AD (DCDiag)
@@ -2172,7 +2167,7 @@ echo  8. Kerberos                     18. Ferramentas RSAT
 echo  9. Certificados AD              19. PowerShell AD
 echo 10. Tempo/Sincronizacao         20. Consulta LDAP
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-20): "
 
@@ -2311,7 +2306,7 @@ goto MENU_ACTIVE_DIRECTORY
 :AD_LOGS
 call :LOG_ACTION "Verificando logs AD"
 echo Logs do Active Directory:
-wevtutil qe "Directory Service" /c:10 /f:text | more 2>nul || echo Logs nao disponiveis
+wevtutil qe "Directory Service" /c:10 /f:text /rd:true | more 2>nul || echo Logs nao disponiveis
 pause
 goto MENU_ACTIVE_DIRECTORY
 
@@ -2327,18 +2322,14 @@ goto MENU_ACTIVE_DIRECTORY
 call :LOG_ACTION "Verificando RSAT"
 echo Ferramentas RSAT:
 echo Verificando se as ferramentas estao instaladas...
-if exist "%ProgramFiles%\WindowsPowerShell\Modules\ActiveDirectory" (
-    echo ✓ Modulo PowerShell AD instalado
-) else (
-    echo ✗ Modulo PowerShell AD nao encontrado
-)
+powershell -Command "if (Get-WindowsCapability -Online -Name 'Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0' | Where-Object {$_.State -eq 'Installed'}) { echo '? Ferramentas RSAT para AD estao instaladas.' } else { echo '? Ferramentas RSAT para AD nao encontradas.' }"
 pause
 goto MENU_ACTIVE_DIRECTORY
 
 :AD_POWERSHELL
 call :LOG_ACTION "PowerShell AD"
 echo Iniciando PowerShell com Active Directory...
-powershell -Command "Import-Module ActiveDirectory -ErrorAction SilentlyContinue; Get-ADDomain" 2>nul || echo Modulo AD nao disponivel
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Import-Module ActiveDirectory -ErrorAction SilentlyContinue; if($?) { Get-ADDomain } else { Write-Host 'Modulo AD nao disponivel.' -ForegroundColor Red }; Read-Host 'Pressione Enter para continuar...'"
 goto MENU_ACTIVE_DIRECTORY
 
 :AD_LDAP
@@ -2346,7 +2337,7 @@ call :LOG_ACTION "Consulta LDAP"
 echo Consulta LDAP:
 echo Digite a base DN (ou Enter para padrao):
 set /p "base_dn=Base DN: "
-if "%base_dn%"=="" set "base_dn=DC=%USERDNSDOMAIN:~0,-4%,DC=com"
+if "%base_dn%"=="" set "base_dn=DC=%USERDNSDOMAIN:,=,DC=%"
 dsquery * "%base_dn%" -limit 10 2>nul || echo Consulta LDAP falhou
 pause
 goto MENU_ACTIVE_DIRECTORY
@@ -2358,9 +2349,9 @@ REM ============================================================================
 :MENU_BACKUP
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                        📋 BACKUP E RECUPERACAO                             ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                        BACKUP E RECUPERACAO                              ¦
+echo +----------------------------------------------------------------------------+
 echo.
 echo  1. Criar Ponto de Restauracao
 echo  2. Restauracao do Sistema
@@ -2378,7 +2369,7 @@ echo 13. Clone do Sistema
 echo 14. Backup de Dados de Usuario
 echo 15. Ferramentas de Recuperacao
 echo.
-echo  0. ← Voltar ao Menu Principal
+echo  0. Voltar ao Menu Principal
 echo.
 set /p "opcao=Escolha uma opcao (0-15): "
 
@@ -2406,7 +2397,7 @@ goto MENU_BACKUP
 :BACKUP_RESTORE_POINT
 call :LOG_ACTION "Criando ponto de restauracao"
 echo Criando ponto de restauracao...
-powershell -Command "Checkpoint-Computer -Description 'Ponto Manual - WMS v2.0 - %DATE% %TIME%' -RestorePointType 'MODIFY_SETTINGS'"
+powershell -Command "Checkpoint-Computer -Description 'Ponto Manual - WMS v1.1 - %DATE% %TIME%' -RestorePointType 'MODIFY_SETTINGS'"
 echo Ponto de restauracao criado com sucesso!
 pause
 goto MENU_BACKUP
@@ -2463,12 +2454,12 @@ goto MENU_BACKUP
 
 :BACKUP_COMPLETE
 call :LOG_ACTION "Executando backup completo"
-echo ═══════════════════════════════════════════════════════════════
+echo ---------------------------------------------------------------
 echo                    BACKUP COMPLETO DO SISTEMA
-echo ═══════════════════════════════════════════════════════════════
+echo ---------------------------------------------------------------
 echo.
 echo 1. Criando ponto de restauracao...
-powershell -Command "Checkpoint-Computer -Description 'Backup Completo - WMS v2.0' -RestorePointType 'MODIFY_SETTINGS'"
+powershell -Command "Checkpoint-Computer -Description 'Backup Completo - WMS v1.1' -RestorePointType 'MODIFY_SETTINGS'"
 echo.
 echo 2. Fazendo backup do registro...
 reg export HKLM "%TEMP%\Registry_Backup_Complete.reg"
@@ -2478,14 +2469,14 @@ md "%TEMP%\CompleteBackup\Drivers" 2>nul
 dism /online /export-driver /destination:"%TEMP%\CompleteBackup\Drivers"
 echo.
 echo Backup completo finalizado!
-echo Arquivos salvos em: %TEMP%\CompleteBackup\
+echo Arquivos salvos em: %TEMP%\ e %TEMP%\CompleteBackup\
 pause
 goto MENU_BACKUP
 
 :BACKUP_LIST_EXISTING
 call :LOG_ACTION "Listando backups existentes"
 echo Pontos de Restauracao Existentes:
-wmic restore list brief 2>nul || echo Nao foi possivel listar pontos de restauracao
+vssadmin list shadows
 echo.
 echo Verificando backups em locais comuns...
 if exist "%TEMP%\*Backup*" (
@@ -2509,7 +2500,7 @@ call :LOG_ACTION "Recuperando arquivos"
 echo Recuperacao de Arquivos:
 echo.
 echo 1. Usar Historico de Arquivos
-echo 2. Usar Ponto de Restauracao  
+echo 2. Usar Ponto de Restauracao
 echo 3. Procurar em Backup Manual
 echo 4. Recuperacao de Dados (Terceiros)
 set /p "recover_option=Opcao: "
@@ -2585,13 +2576,17 @@ goto :EOF
 
 :CONFIRM_ACTION
 echo.
-echo ⚠️  ATENCAO: Esta operacao pode afetar o sistema.
-echo Deseja continuar? (S/N)
-set /p "confirm=Opcao: "
+echo +----------------------------------------------------------------+
+echo ¦                         ACAO CRITICA                           ¦
+echo +----------------------------------------------------------------+
+echo.
+echo  ATENCAO: %~1
+echo  Esta operacao pode afetar o sistema. Deseja continuar? (S/N)
+set /p "confirm="
 if /i not "%confirm%"=="S" (
     echo Operacao cancelada.
     pause
-    goto :EOF
+    goto MENU_PRINCIPAL
 )
 goto :EOF
 
@@ -2602,15 +2597,15 @@ REM ============================================================================
 :VER_LOG
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                         📋 LOG DE ATIVIDADES                               ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                         LOG DE ATIVIDADES                                ¦
+echo +----------------------------------------------------------------------------+
 echo.
 if exist "%LOG_FILE%" (
     echo Exibindo log de atividades:
-    echo ════════════════════════════════════════════════════════════════
+    echo ----------------------------------------------------------------
     type "%LOG_FILE%" | more
-    echo ════════════════════════════════════════════════════════════════
+    echo ----------------------------------------------------------------
     echo.
     echo Log completo salvo em: %LOG_FILE%
 ) else (
@@ -2624,94 +2619,73 @@ goto MENU_PRINCIPAL
 :INFO_SISTEMA
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                        ℹ️ INFORMACOES DO SISTEMA                          ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                        INFORMACOES DO SISTEMA                            ¦
+echo +----------------------------------------------------------------------------+
 echo.
-echo ┌─────────────────────── INFORMACOES BASICAS ───────────────────────┐
-echo │                                                                    │
-echo │  Sistema Operacional: %OS_VERSION%
-echo │  Arquitetura: %OS_ARCH%
-echo │  Dominio/Workgroup: %DOMAIN_STATUS%
-for /f "tokens=2 delims==" %%a in ('wmic computersystem get Manufacturer /value ^| find "="') do echo │  Fabricante: %%a
-for /f "tokens=2 delims==" %%a in ('wmic computersystem get Model /value ^| find "="') do echo │  Modelo: %%a
-for /f "tokens=2 delims==" %%a in ('wmic cpu get Name /value ^| find "="') do echo │  Processador: %%a
-echo │                                                                    │
-echo └────────────────────────────────────────────────────────────────────┘
+echo +----------------------- INFORMACOES BASICAS -----------------------+
+echo ¦                                                                    ¦
+echo ¦  Sistema Operacional: %OS_VERSION%
+echo ¦  Arquitetura: %OS_ARCH%
+echo ¦  Dominio/Workgroup: %DOMAIN_STATUS%
+for /f "tokens=2 delims==" %%a in ('wmic computersystem get Manufacturer /value ^| find "="') do echo ¦  Fabricante: %%a
+for /f "tokens=2 delims==" %%a in ('wmic computersystem get Model /value ^| find "="') do echo ¦  Modelo: %%a
+for /f "tokens=2 delims==" %%a in ('wmic cpu get Name /value ^| find "="') do echo ¦  Processador: %%a
+echo ¦                                                                    ¦
+echo +--------------------------------------------------------------------+
 echo.
-echo ┌─────────────────────── INFORMACOES DO SCRIPT ─────────────────────┐
-echo │                                                                    │
-echo │  Script: %SCRIPT_NAME% v2.0 - Edicao Completa
-echo │  Autor: Andrey
-echo │  Data de Execucao: %DATE% %TIME%
-echo │  Log de Atividades: %LOG_FILE%
-echo │  Total de Funcionalidades: 200+ comandos e ferramentas
-echo │  Compatibilidade: Windows 7/8.1/10/11 + Active Directory
-echo │                                                                    │
-echo └────────────────────────────────────────────────────────────────────┘
+echo +----------------------- INFORMACOES DO SCRIPT ---------------------+
+echo ¦                                                                    ¦
+echo ¦  Script: %SCRIPT_NAME% v1.1 - Edicao Completa (ANSI)
+echo ¦  Autor: Andrey Gheno Piekas
+echo ¦  Data de Execucao: %DATE% %TIME%
+echo ¦  Log de Atividades: %LOG_FILE%
+echo ¦  Total de Funcionalidades: 200+ comandos e ferramentas
+echo ¦  Compatibilidade: Windows 7/8.1/10/11 + Active Directory
+echo ¦                                                                    ¦
+echo +--------------------------------------------------------------------+
 echo.
-echo ┌─────────────────────── ESTATISTICAS DE USO ───────────────────────┐
-echo │                                                                    │
+echo +----------------------- ESTATISTICAS DE USO -----------------------+
+echo ¦                                                                    ¦
 if exist "%LOG_FILE%" (
-    for /f %%i in ('type "%LOG_FILE%" ^| find /c /v ""') do echo │  Total de acoes executadas: %%i
+    for /f %%i in ('type "%LOG_FILE%" ^| find /c /v ""') do echo ¦  Total de acoes executadas: %%i
 ) else (
-    echo │  Total de acoes executadas: 0
+    echo ¦  Total de acoes executadas: 0
 )
-echo │  Sessao iniciada em: %DATE% %TIME%
-echo │                                                                    │
-echo └────────────────────────────────────────────────────────────────────┘
+echo ¦  Sessao iniciada em: %DATE% %TIME%
+echo ¦                                                                    ¦
+echo +--------------------------------------------------------------------+
 echo.
 echo Pressione qualquer tecla para voltar...
 pause >nul
 goto MENU_PRINCIPAL
 
 :SAIR
-call :LOG_ACTION "Finalizando Windows Management Suite v2.0"
+call :LOG_ACTION "Finalizando Windows Management Suite v1.1"
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════════════════════╗
-echo ║                          FINALIZANDO SISTEMA                              ║
-echo ╚════════════════════════════════════════════════════════════════════════════╝
+echo +----------------------------------------------------------------------------+
+echo ¦                          FINALIZANDO SISTEMA                             ¦
+echo +----------------------------------------------------------------------------+
 echo.
-echo              ███████╗██╗███╗   ██╗ █████╗ ██╗     ██╗███████╗ █████╗ ███╗   ██╗██████╗  ██████╗ 
-echo              ██╔════╝██║████╗  ██║██╔══██╗██║     ██║╚══███╔╝██╔══██╗████╗  ██║██╔══██╗██╔═══██╗
-echo              █████╗  ██║██╔██╗ ██║███████║██║     ██║  ███╔╝ ███████║██╔██╗ ██║██║  ██║██║   ██║
-echo              ██╔══╝  ██║██║╚██╗██║██╔══██║██║     ██║ ███╔╝  ██╔══██║██║╚██╗██║██║  ██║██║   ██║
-echo              ██║     ██║██║ ╚████║██║  ██║███████╗██║███████╗██║  ██║██║ ╚████║██████╔╝╚██████╔╝
-echo              ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝ 
+echo       Obrigado por usar o %SCRIPT_NAME%!
 echo.
-echo ┌────────────────────────────────────────────────────────────────────────────┐
-echo │                                                                            │
-echo │  Obrigado por usar o %SCRIPT_NAME%!              │
-echo │                                                                            │
-echo │  ✓ Desenvolvido por: Andrey Gheno Piekas                                              │
-echo │  ✓ Versao: 1.1 - Edicao Completa com Active Directory                    │
-echo │  ✓ Total de funcionalidades: 200+ comandos e ferramentas                 │
-echo │  ✓ Compativel com: Windows 7/8.1/10/11 + Active Directory               │
-echo │  ✓ Sistema de logging avancado implementado                              │
-echo │                                                                            │
-echo └────────────────────────────────────────────────────────────────────────────┘
+echo +----------------------------------------------------------------------------+
+echo ¦                                                                            ¦
+echo ¦  ? Desenvolvido por: Andrey Gheno Piekas                                   ¦
+echo ¦  ? Versao: 1.1 - Edicao Completa com Active Directory (Corrigido)          ¦
+echo ¦  ? Total de funcionalidades: 200+ comandos e ferramentas                   ¦
+echo ¦  ? Compativel com: Windows 7/8.1/10/11 + Active Directory                  ¦
+echo ¦  ? Sistema de logging avancado implementado                                ¦
+echo ¦                                                                            ¦
+echo +----------------------------------------------------------------------------+
 echo.
 if exist "%LOG_FILE%" (
     for /f %%i in ('type "%LOG_FILE%" ^| find /c /v ""') do (
-        echo ✓ Total de %%i acoes foram registradas no log
+        echo ? Total de %%i acoes foram registradas no log
     )
-    echo ✓ Log de atividades salvo em: %LOG_FILE%
+    echo ? Log de atividades salvo em: %LOG_FILE%
 )
-echo.
-echo ┌────────────────────────────────────────────────────────────────────────────┐
-echo │                         RESUMO DA SESSAO                                  │
-echo │                                                                            │
-echo │  Categorias disponibilizadas:                                             │
-echo │  • Sistema e Hardware          • Disco e Arquivos                         │
-echo │  • Rede e Conectividade        • Seguranca e Firewall                     │
-echo │  • Performance e Memoria       • Usuarios e Grupos                        │
-echo │  • Servicos e Processos        • Logs e Monitoramento                     │
-echo │  • Ferramentas Avancadas       • Configuracoes do Sistema                 │
-echo │  • Programas e Drivers         • Diagnosticos Completos                   │
-echo │  • Active Directory            • Backup e Recuperacao                     │
-echo │                                                                            │
-echo └────────────────────────────────────────────────────────────────────────────┘
 echo.
 echo Pressione qualquer tecla para sair...
 pause >nul
@@ -2722,9 +2696,8 @@ exit /b 0
 
 REM ===============================================================================
 REM                              FIM DO SCRIPT
-REM             WINDOWS MANAGEMENT SUITE V2.0 - EDICAO COMPLETA
-REM                	 DESENVOLVIDO POR: ANDREY GHENO PIEKAS 
-REM                     http://github.com/andreypiekas/
-REM                    TOTAL: 200+ COMANDOS E FERRAMENTAS  
+REM             WINDOWS MANAGEMENT SUITE V1.1 - EDICAO COMPLETA
+REM                      DESENVOLVIDO POR: ANDREY GHENO PIEKAS
+REM                       http://github.com/andreypiekas/
+REM                     TOTAL: 200+ COMANDOS E FERRAMENTAS
 REM ===============================================================================
-
